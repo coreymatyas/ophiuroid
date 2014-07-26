@@ -1,0 +1,12 @@
+{
+  "name": "ophiuroid",
+  "version": "0.1.0",
+  "description": "Automated web media ripper for various sites.",
+  "main": "app.js",
+  "author": "Corey Matyas",
+  "license": "MIT",
+  "dependencies": {
+    "request": "~2.37.0",
+    "cheerio": "~0.17.0"
+  }
+}

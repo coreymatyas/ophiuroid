@@ -1,0 +1,5 @@
+node_modules/
+downloads/
+
+# personal config changes
+config.js
