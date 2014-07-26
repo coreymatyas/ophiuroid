@@ -1,5 +1,9 @@
+# npm packages
 node_modules/
+
+# application output
 downloads/
+logs/
 
 # personal config changes
 config.js

@@ -3,6 +3,12 @@ var config = {};
 // base directory for saving scrape artifacts
 config.baseDir = 'downloads/';
 
+config.log = {
+	dir: 'logs/',         // directory to save file logs; set to null to not save file logs
+	consoleLevel: 'info', // minimum log level to print to console. info < warn < error
+	fileLevel: 'info'     // minimum log level to save to file. info < warn < error
+};
+
 // name  : common name of the site to scrape; used for save location 
 // url   : URL of the site to scrape
 // action: disabled -> do nothing, update -> only save new posts, refresh -> overwrite all
@@ -11,10 +17,8 @@ config.sites = [
 ];
 
 config.blogger = {
-	// time in seconds to wait between page requests for rate limiting
-	pageDelay: 10,
-	// in the event of an HTTP error, time in seconds before repeating the request
-	retryDelay: 15
+	pageDelay: 10, // time in seconds to wait between page requests for rate limiting
+	retryDelay: 15 // in the event of an HTTP error, time in seconds before repeating the request
 };
 
 module.exports = config;

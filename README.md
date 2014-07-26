@@ -7,7 +7,7 @@ Even then, it's still suitable for one-off downloads.
 
 Ophiuroid tries (as much as a psuedo-monolithic client application can) to fit 
 the Unix philosophy to "do one thing and do it well." Ophiuroid is an effective 
-tool for simply ripping web media. All output artifacts will be able to 
+tool for simply ripping web media. All application output will be able to 
 represented in the filesystem in their original formats without lock-in from a 
 proprietary database that would limit compatibility with other tools. 
 
