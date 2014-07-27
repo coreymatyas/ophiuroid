@@ -5,7 +5,6 @@ var config  = require('./config'),
  TODO:
   - Handle legitimate duplicate filenames better.
   - More control over save location.
-  - Exception handling for web errors.
   - Add some example sites.
  */
 

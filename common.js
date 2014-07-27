@@ -1,15 +1,19 @@
-var fs      = require('fs'),
-    request = require('request'),
-    config  = require('./config'),
-    log     = require('./log');
+var fs     = require('fs'),
+    http   = require('http'),
+    https  = require('https'),
+    url    = require('url'),
+    config = require('./config'),
+    log    = require('./log');
 
 if (!fs.existsSync(config.baseDir)) {
 	log.info('Creating base save directory: ' + config.baseDir);
 	fs.mkdirSync(config.baseDir);
 }
 
-module.exports.downloadFile = function downloadFile (site, url) {
-	var name = require('url').parse(url).pathname.split('/').slice(-1).pop();
+// download file at given url
+// returns true if it would be a duplicate file
+module.exports.downloadFile = function downloadFile (site, siteUrl) {
+	var name = url.parse(siteUrl).pathname.split('/').slice(-1).pop();
 	var basePath = config.baseDir + site.name;
 	var path = basePath + '/' + name;
 	var duplicate = false;
@@ -32,7 +36,13 @@ module.exports.downloadFile = function downloadFile (site, url) {
 	
 	if (site.action == 'refresh' || (site.action == 'update' && !duplicate)) {
 		log.info(site.name + ' - Saving file: ' + name + ' to ' + path);
-		request(url).pipe(fs.createWriteStream(path));
+		var protocol = url.parse(siteUrl).protocol == 'https:' ? https : http;
+		protocol.get(siteUrl, function(res) {
+			res.pipe(fs.createWriteStream(path));	
+		}).on('error', function(e) {
+			log.error(site.name + ' - Download file error. Retrying: ' + e.message);
+			downloadFile(site, siteUrl);
+		});
 		return false;
 	} else {
 		log.info(site.name + ' - Found existing file while updating: ' + name);
