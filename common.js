@@ -14,7 +14,7 @@ if (!fs.existsSync(config.baseDir)) {
 // returns true if it would be a duplicate file
 module.exports.downloadFile = function downloadFile (site, siteUrl) {
 	var name = url.parse(siteUrl).pathname.split('/').slice(-1).pop();
-	var basePath = config.baseDir + site.name;
+	var basePath = 'save' in site ? site.save : config.baseDir + site.name;
 	var path = basePath + '/' + name;
 	var duplicate = false;
 

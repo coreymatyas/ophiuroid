@@ -12,8 +12,10 @@ config.log = {
 // name  : common name of the site to scrape; used for save location 
 // url   : URL of the site to scrape
 // action: disabled -> do nothing, update -> only save new posts, refresh -> overwrite all
+// save  : if set, writes output files to the given directory
 config.sites = [
 	// { name: '', url: '', action: ''}
+	// { name: '', url: '', action: '', save: ''}
 ];
 
 // RIPPER-SPECIFIC CONFIGS //
