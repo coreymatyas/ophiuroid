@@ -21,6 +21,33 @@ been warned. There may be bugs.
 3. Modify config.js, particularly sites.
 4. `node app.js`
 
+## Adding a Ripper
+1. Create a new file in rippers/ named as the lowercase of its stylized name 
+without spaces. ex: `rippers/rippernamehere.js`
+2. Add an object to the config for it under config.rip named the same as the 
+filename. ex: `config.rip.rippernamehere`
+3. Add module imports. Ophiuroid exposes 3 things that a ripper will be use:
+    1. `../common`: contains common functionality for consistency between 
+       rippers. Currently has `downloadPage` for properly ripping and saving 
+       a path to media.
+    2. `../log`: common logger using winston. 
+    3. `../config`.rip.rippername: get the config for the specific ripper 
+       module easily accessible.
+4. Set your `module.exports`:
+    1. `name`: stylized, human-readable name for the ripper. ex: 'Blogger', 
+        'Imgur Gallery', etc.
+    2. `url`: regular expression that matches URLs the ripper is capable of 
+       ripping. Note: also has to match the protocol. See `blogger.js` for 
+       reference.
+    3. `authority`: describes how "specific" the `url` regex is to the given 
+       ripping method. 0 -> internet (matches any site), 1 -> domain (matches 
+       example.com/*), 2+ -> subsections (matches example.com/images/*). Used 
+       for determining the most appropriate ripper for a given URL. In the 
+       event of multiple rippers of the same highest authority matching the 
+       same URL regex, behavior is undefined.
+    4. `rip`: function pointer to a function that accepts a site object as 
+       the only parameter and performs the ripping.
+
 ## Contributing
 I'm not actively seeking contributions since a lot of the core isn't finished 
 yet, but if you particularly want to help, I've got a TODO list in the comments 

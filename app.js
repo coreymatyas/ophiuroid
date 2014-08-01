@@ -3,8 +3,6 @@ var config  = require('./config'),
 
 /*
  TODO:
-  - Handle legitimate duplicate filenames better.
-  - More control over save location.
   - Add some example sites.
  */
 

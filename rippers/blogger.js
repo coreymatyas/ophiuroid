@@ -8,11 +8,11 @@ var config  = require('../config').rip.blogger,
  TODO:
   - Manipulate max-results GET parameter for faster scraping.
   - Be able to save post text / more post information.
+  - Group images by post for multi-image posts
  */
 
 module.exports.name = 'Blogger';
 module.exports.url = /^https?:\/\/([a-zA-Z\d-]+\.){0,}blogspot\.com/;
-// specificity of regex to site as a whole. 0 -> internet, 1 -> domain, 2-Inf -> subsections
 module.exports.authority = 1;
 
 function scrapePage (site, url) {
