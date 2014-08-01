@@ -10,6 +10,8 @@ if (!fs.existsSync(config.baseDir)) {
 	fs.mkdirSync(config.baseDir);
 }
 
+downloaded = {};
+
 // download file at given url
 // returns true if it would be a duplicate file
 module.exports.downloadFile = function downloadFile (site, siteUrl) {
@@ -24,12 +26,16 @@ module.exports.downloadFile = function downloadFile (site, siteUrl) {
 		fs.mkdirSync(basePath);
 	}
 	
+	if (!(basePath in downloaded)) {
+		downloaded[basePath] = [];
+	}
+
 	var i = 0, tempPath = path;
 	while (fs.existsSync(tempPath)) {
 		tempPath = path + '.' + i;
 		i++;
 	}
-	if (path != tempPath) {
+	if (path != tempPath && downloaded[basePath].indexOf(path) === -1) {
 		duplicate = true;
 	}
 	path = tempPath;
@@ -39,6 +45,7 @@ module.exports.downloadFile = function downloadFile (site, siteUrl) {
 		var protocol = url.parse(siteUrl).protocol == 'https:' ? https : http;
 		protocol.get(siteUrl, function(res) {
 			res.pipe(fs.createWriteStream(path));	
+			downloaded[basePath].push(path);
 		}).on('error', function(e) {
 			log.error(site.name + ' - Download file error. Retrying: ' + e.message);
 			downloadFile(site, siteUrl);
