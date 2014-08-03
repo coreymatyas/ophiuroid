@@ -37,8 +37,9 @@ module.exports.downloadFile = function downloadFile (site, siteUrl) {
 	}
 	if (path != tempPath && downloaded[basePath].indexOf(path) === -1) {
 		duplicate = true;
+	} else {
+		path = tempPath;
 	}
-	path = tempPath;
 	
 	if (site.action == 'refresh' || (site.action == 'update' && !duplicate)) {
 		log.info(site.name + ' - Saving file: ' + name + ' to ' + path);
