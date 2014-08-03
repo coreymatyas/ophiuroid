@@ -27,18 +27,18 @@ config.sites.forEach(function (site) {
 				if (item.authority > authority) {
 					ripper = item;
 					authority = item.authority;
-					log.debug(site.name + ' - Choosing ripper: ' + item.name + ' ...');
+					log.debug(site.name + ' - Choosing ripper: ' + item.name);
 				}
 			}
 		});
 
 		if (ripper !== null) {
-			log.info(site.name + ' - Starting scrape with ripper ' + ripper.name + '...');
+			log.info(site.name + ' - Starting scrape with ripper: ' + ripper.name);
 			ripper.rip(site);
 		} else {
-			log.error(site.name + ' - Could not find valid ripper. Skipping...');
+			log.error(site.name + ' - Could not find valid ripper. Skipping.');
 		}
 	} else {
-		log.info(site.name + ' - Site is disabled. Skipping...')
+		log.info(site.name + ' - Site is disabled. Skipping.')
 	}
 });
