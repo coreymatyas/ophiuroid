@@ -9,9 +9,5 @@ var config = require('./config'),
  */
 
 config.sites.forEach(function (site) {
-	if (site.action != 'disabled') {
-		common.ripSite(site);
-	} else {
-		log.info(site.name + ' - Site is disabled. Skipping.')
-	}
+	common.ripSite(site);
 });
