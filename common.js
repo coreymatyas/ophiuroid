@@ -14,10 +14,10 @@ downloaded = {};
 
 // download file at given url
 // returns true if it would be a duplicate file
-module.exports.downloadFile = function downloadFile (site, siteUrl) {
+module.exports.downloadFileTo = function (site, siteUrl, filename) {
 	var name = url.parse(siteUrl).pathname.split('/').slice(-1).pop();
 	var basePath = 'save' in site ? site.save : config.baseDir + site.name;
-	var path = basePath + '/' + name;
+	var path = basePath + '/' + (filename != null ? filename : name);
 	var duplicate = false;
 
 	// Initialize save directory if does not exist
@@ -58,6 +58,10 @@ module.exports.downloadFile = function downloadFile (site, siteUrl) {
 	}
 }
 
+module.exports.downloadFile = function (site, siteUrl) {
+	return module.exports.downloadFileTo(site, siteUrl, null);
+}
+
 rippers = Array();
 
 require('fs').readdirSync(__dirname + '/rippers/').forEach(function(file) {
@@ -70,7 +74,7 @@ require('fs').readdirSync(__dirname + '/rippers/').forEach(function(file) {
 	}
 });
 
-module.exports.ripSite = function(site) {
+module.exports.ripSite = function (site) {
 	if (site.action != 'disabled') {
 		var ripper = null, authority = -1;
 		rippers.forEach(function (item) {
@@ -93,4 +97,8 @@ module.exports.ripSite = function(site) {
 	} else {
 		log.info(site.name + ' - Site is disabled. Skipping.')
 	}
+}
+
+module.exports.ripURL = function (site, url) {
+	module.exports.ripSite({ name: site.name, url: url, action: site.action });
 }
