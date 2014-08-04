@@ -16,15 +16,27 @@ config.log = {
 config.sites = [
 	// { name: '', url: '', action: ''}
 	// { name: '', url: '', action: '', save: ''}
+
+	// Examples:
+	// { name: 'imgur Gallery', url: 'http://imgur.com/', action: 'refresh' }
 ];
 
 // RIPPER-SPECIFIC CONFIGS //
 config.rip = {};
 
 config.rip.blogger = {
-	enabled: true,
 	pageDelay: 10, // time in seconds to wait between page requests for rate limiting
 	retryDelay: 15 // in the event of an HTTP error, time in seconds before repeating the request
+};
+
+config.rip.imgur = {};
+config.rip.imgur.album = {
+	retryDelay: 5,
+	ordered: true // if true, prepend index of image in album onto filename '1 - image.png'
+};
+config.rip.imgur.gallery = {
+	retryDelay: 5,
+	distance: 5 // number of pages to rip. 1 page = 60 images
 };
 
 module.exports = config;

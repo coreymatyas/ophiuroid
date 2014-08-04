@@ -23,17 +23,18 @@ been warned. There may be bugs.
 
 ## Supported Media Sources
  - Blogger (aka Blogspot): download all images from posts.
+ - imgur: download individual images, albums, and the gallery.
 
 ## Adding a Ripper
 1. Create a new file in rippers/ named as the lowercase of its stylized name 
 without spaces. Use hyphens to designate sub-functionality (different path 
-requirements) for a given site. ex: `rippers/rippernamehere.js`
+requirements) for a given site. ex: `rippers/rippername.js`
 2. Add an object to the config for it under config.rip named the same as the 
-filename if you need config settings. ex: `config.rip.rippernamehere`
+filename, substituting '.' for '-' (both to create a hierarchy and because '-' 
+is an invalid character) if you need config settings. ex: `config.rip.rippername`
 3. Add module imports. Ophiuroid exposes 3 things that a ripper will be use:
     1. `../common`: contains common functionality for consistency between 
-       rippers. Currently has `downloadPage` for properly ripping and saving 
-       a path to media and `ripSite` for performing a rip on a site object.
+       rippers. See section below for method listing.
     2. `../log`: common logger using winston. 
     3. `../config`.rip.rippername: get the config for the specific ripper 
        module easily accessible.
@@ -51,6 +52,16 @@ filename if you need config settings. ex: `config.rip.rippernamehere`
        same URL regex, behavior is undefined.
     4. `rip`: function pointer to a function that accepts a site object as 
        the only parameter and performs the ripping.
+
+## common.js Functionality
+`common.js` contains the following functions for rippers to use:
+ - `downloadFileTo(site, siteUrl, filename)`: download and save `siteUrl` 
+   in the save context of `site` to the given `filename`.
+ - `downloadFile(site, siteUrl)`: short form of `downloadFileTo` without a 
+   custom filename.
+ - `ripSite(site)`: perform a rip on the given site object.
+ - `ripURL(site, url)`: rip `url` in the save context of `site` using the 
+   appropriate ripper from `ripSite`.
 
 ## Contributing
 I'm not actively seeking contributions since a lot of the core isn't finished 
