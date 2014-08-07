@@ -22,8 +22,10 @@ been warned. There may be bugs.
 4. `node app.js`
 
 ## Supported Media Sources
- - Blogger (aka Blogspot): download all images from posts.
- - imgur: download individual images, albums, and the gallery.
+| Site Name | Maintainer   | Scrape Method | Features 
+| --------- | ------------ | ------------- | -------- 
+| Blogger   | @coreymatyas | Page Scrape   | Download all images from posts on a given blog.
+| imgur     | @coreymatyas | Page Scrape   | Download individual images, albums, and the gallery.
 
 ## Adding a Ripper
 1. Create a new file in rippers/ named as the lowercase of its stylized name 
@@ -31,7 +33,8 @@ without spaces. Use hyphens to designate sub-functionality (different path
 requirements) for a given site. ex: `rippers/rippername.js`
 2. Add an object to the config for it under config.rip named the same as the 
 filename, substituting '.' for '-' (both to create a hierarchy and because '-' 
-is an invalid character) if you need config settings. ex: `config.rip.rippername`
+is an invalid character) if you need config settings. 
+ex: `config.rip.rippername`
 3. Add module imports. Ophiuroid exposes 3 things that a ripper will be use:
     1. `../common`: contains common functionality for consistency between 
        rippers. See section below for method listing.
