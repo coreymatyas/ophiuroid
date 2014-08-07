@@ -39,4 +39,14 @@ config.rip.imgur.gallery = {
 	distance: 5 // number of pages to rip. 1 page = 60 images
 };
 
+config.rip.gfycat = {
+	retryDelay: 5
+};
+
+config.rip.gfycat.formats  = {
+	webm: false, // if true, saves the requested image in <format>
+	gif: true, // will save once for each set format.
+	mp4: false
+}
+
 module.exports = config;

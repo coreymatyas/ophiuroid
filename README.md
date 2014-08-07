@@ -26,6 +26,7 @@ been warned. There may be bugs.
 | --------- | ------------ | ------------- | -------- 
 | Blogger   | @coreymatyas | Page Scrape   | Download all images from posts on a given blog.
 | imgur     | @coreymatyas | Page Scrape   | Download individual images, albums, and the gallery.
+| Gfycat    | @cmhull42    | API           | Download html5 videos as gif, webm, or mp4.
 
 ## Adding a Ripper
 1. Create a new file in rippers/ named as the lowercase of its stylized name 
