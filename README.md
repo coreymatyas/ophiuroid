@@ -87,3 +87,5 @@ it's funny. They're also spiny which, in some regards, could make that crawling
 more like scraping. And, food could be an analogy for media? Whether the 
 metaphor is decent or not, the program is still called Ophiuroid. Hope it's 
 useful!
+
+![Ophiuroid](http://i.imgur.com/q5k1RnT.jpg "The Glorious Ophiuroid")
