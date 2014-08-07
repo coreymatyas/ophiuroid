@@ -40,13 +40,12 @@ config.rip.imgur.gallery = {
 };
 
 config.rip.gfycat = {
-	retryDelay: 5
+	retryDelay: 5,
+	formats: {
+		webm: false, // if true, saves the requested image in <format>
+		gif: true, // will save once for each set format.
+		mp4: false
+	}
 };
-
-config.rip.gfycat.formats  = {
-	webm: false, // if true, saves the requested image in <format>
-	gif: true, // will save once for each set format.
-	mp4: false
-}
 
 module.exports = config;

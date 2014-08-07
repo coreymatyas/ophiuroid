@@ -7,3 +7,6 @@ logs/
 
 # personal config changes
 config.js
+
+# editor artifacts
+*~
