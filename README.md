@@ -66,6 +66,8 @@ ex: `config.rip.rippername`
  - `ripSite(site)`: perform a rip on the given site object.
  - `ripURL(site, url)`: rip `url` in the save context of `site` using the 
    appropriate ripper from `ripSite`.
+ - `getPage(site, url, retryDelay, retryMax, callback(html))` - get a page for
+   parsing with logging and automatic error retry handling.
 
 ## Contributing
 I'm not actively seeking contributions since a lot of the core isn't finished 

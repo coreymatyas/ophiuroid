@@ -4,8 +4,9 @@ var config = require('./config'),
 
 /*
  TODO:
-  - Add some example sites.
+  - Implement resuming when initial downloads are interrupted.
   - Add an easy way to do a one-off rip.
+  - Proxy support.
  */
 
 config.sites.forEach(function (site) {

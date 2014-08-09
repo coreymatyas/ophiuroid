@@ -1,7 +1,6 @@
 var config  = require('../config').rip.blogger,
     common  = require('../common'),
     log     = require('../log'),
-    request = require('request'),
     cheerio = require('cheerio');
 
 /*
@@ -16,29 +15,23 @@ module.exports.url = /^https?:\/\/([a-zA-Z\d-]+\.){0,}blogspot\.com/;
 module.exports.authority = 1;
 
 function scrapePage (site, url) {
-	log.info(site.name + ' - Requesting next page: ' + url);
-	request(url, function(error, response, html) {
-		if (!error && response.statusCode == 200) {
-			var $ = cheerio.load(html);
+	common.getPage(site, url, config.retryDelay, config.retryMax, function(html) {
+		var $ = cheerio.load(html);
 
-			var finished = false;
-			$('div.separator a:has(img)').each(function(i, element) {
-				finished = common.downloadFile(site, $(this).attr('href'));
-			});
+		var finished = false;
+		$('div.separator a:has(img)').each(function(i, element) {
+			finished = common.downloadFile(site, $(this).attr('href'));
+		});
 
-			if (!finished) {
-				var nextPage = $('#Blog1_blog-pager-older-link');
-				if (nextPage.length) {
-					setTimeout(function() { scrapePage(site, nextPage.attr('href')) }, config.pageDelay * 1000);
-				} else {
-					log.info(site.name + ' - No next page link found. Finished scrape.');
-				}
+		if (!finished) {
+			var nextPage = $('#Blog1_blog-pager-older-link');
+			if (nextPage.length) {
+				setTimeout(function() { scrapePage(site, nextPage.attr('href')) }, config.pageDelay * 1000);
 			} else {
-				log.info(site.name + ' - Finishing scrape.');
+				log.info(site.name + ' - No next page link found. Finished scrape.');
 			}
 		} else {
-			log.warn(site.name + ' - Page scrape failed due to HTTP error. Retrying in ' + config.retryDelay + ' seconds...');
-			setTimeout(function() { scrapePage(site, url); }, config.retryDelay * 1000);
+			log.info(site.name + ' - Finishing scrape.');
 		}
 	});
 }

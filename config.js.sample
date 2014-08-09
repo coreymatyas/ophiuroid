@@ -9,6 +9,9 @@ config.log = {
 	fileLevel: 'info'     // minimum log level to save to file. debug < info < warn < error
 };
 
+config.retryDelay = 10; // default time to wait between page requests in seconds
+config.retryMax = 5; // default number of times to retry getting a page before giving up
+
 // name  : common name of the site to scrape; used for save location 
 // url   : URL of the site to scrape
 // action: disabled -> do nothing, update -> only save new posts, refresh -> overwrite all
@@ -26,7 +29,8 @@ config.rip = {};
 
 config.rip.blogger = {
 	pageDelay: 10, // time in seconds to wait between page requests for rate limiting
-	retryDelay: 15 // in the event of an HTTP error, time in seconds before repeating the request
+	retryDelay: 15, // in the event of an HTTP error, time in seconds before repeating the request
+	retryMax: 7 // blogger has a thing about trying to time out requests repeatedly
 };
 
 config.rip.imgur = {};

@@ -1,9 +1,10 @@
-var fs     = require('fs'),
-    http   = require('http'),
-    https  = require('https'),
-    url    = require('url'),
-    config = require('./config'),
-    log    = require('./log');
+var fs      = require('fs'),
+    http    = require('http'),
+    https   = require('https'),
+    url     = require('url'),
+    request = require('request'),
+    config  = require('./config'),
+    log     = require('./log');
 
 if (!fs.existsSync(config.baseDir)) {
 	log.info('Creating base save directory: ' + config.baseDir);
@@ -101,4 +102,28 @@ module.exports.ripSite = function (site) {
 
 module.exports.ripURL = function (site, url) {
 	module.exports.ripSite({ name: site.name, url: url, action: site.action });
+}
+
+getPages = {};
+
+module.exports.getPage = function (site, url, retryDelay, retryMax, callback) {
+	retryDelay = retryDelay === null ? config.retryDelay : retryDelay;
+	retryMax   = retryMax   === null ? config.retryMax   : retryMax;
+	getPages[url] = url in getPages ? getPages[url] + 1 : 1;
+
+	if (getPages[url] <= retryMax) {
+		log.info(site.name + ' - Requesting page: ' + url);
+		request(url, function(error, response, html) {
+			if (!error && response.statusCode == 200) {
+				callback(html);
+			} else {
+				log.warn(site.name + ' - Getting page errored. Retrying in ' + retryDelay + ' seconds.');
+				setTimeout(function() { 
+					module.exports.getPage(site, url, retryDelay, retryMax, callback); 
+				}, retryDelay * 1000);
+			}
+		});
+	} else {
+		log.error(site.name + ' - Exceeded retryMax attempting to get: ' + url);
+	}
 }
