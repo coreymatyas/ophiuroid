@@ -8,7 +8,6 @@ module.exports.url = /^https?:\/\/([a-zA-Z\d-]+\.){0,}imgur\.com\/?(?:gallery)?/
 module.exports.authority = 1;
 
 module.exports.rip = function(site) {
-	0
 	for (var i = 0; i < config.distance; i++) {
 		var url = 'http://imgur.com/gallery/hot/viral/page/0/hit?scrolled&set=' + i;
 
