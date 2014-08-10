@@ -2,7 +2,7 @@ var common = require('../common'),
     http   = require('http'),
     mime   = require('mime');
 
-var regex = /^https?:\/\/(?:(?:i|www)\.)?imgur\.com\/([A-Za-z0-9]{7}|[A-Za-z0-9]{5})(\.(?:png|gif|jpg|jpeg|apng|tif|tiff))?/;
+var regex = /^https?:\/\/(?:(?:i|www)\.)?imgur\.com\/(?:gallery\/)?([A-Za-z0-9]{7}|[A-Za-z0-9]{5})(\.(?:png|gif|jpg|jpeg|apng|tif|tiff))?/;
 
 module.exports.name = 'imgur - Image';
 module.exports.url = regex;
