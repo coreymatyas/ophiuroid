@@ -90,7 +90,7 @@ module.exports.ripSite = function (site) {
 		});
 
 		if (ripper !== null) {
-			log.info(site.name + ' - Starting rip with ripper: ' + ripper.name);
+			log.debug(site.name + ' - Starting rip with ripper: ' + ripper.name);
 			ripper.rip(site);
 		} else {
 			log.error(site.name + ' - Could not find valid ripper. Skipping.');

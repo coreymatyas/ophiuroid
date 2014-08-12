@@ -5,10 +5,14 @@ var config = require('./config'),
 /*
  TODO:
   - Implement resuming when initial downloads are interrupted.
-  - Add an easy way to do a one-off rip.
   - Proxy support.
  */
 
-config.sites.forEach(function (site) {
-	common.ripSite(site);
-});
+if (process.argv.length === 3) {
+	var url = require('url').parse(process.argv[2]);
+	common.ripSite({ name: url.host, url: url.href, action: 'refresh' });
+} else {
+	config.sites.forEach(function (site) {
+		common.ripSite(site);
+	});
+}

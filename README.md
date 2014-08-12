@@ -21,6 +21,10 @@ been warned. There may be bugs.
 3. Modify config.js, particularly sites.
 4. `node app.js`
 
+### Command Line Arguments
+`node app.js [one-time rip]`  
+one-time rip: Perform a rip on the given URL without modifying the config.
+
 ## Supported Media Sources
 | Site Name | Maintainer   | Scrape Method | Features 
 | --------- | ------------ | ------------- | -------- 
