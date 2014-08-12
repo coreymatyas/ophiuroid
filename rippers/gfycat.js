@@ -14,7 +14,7 @@ module.exports.rip = function(site) {
 
 	common.getPage(site, "http://gfycat.com/cajax/get/" + groups[1], config.retryDelay, null, function(html) {
 		var formats = config.formats;
-		var response = JSON.parse(body);
+		var response = JSON.parse(html);
 		for (var format in formats) {
 			if (formats[format] == true) {
 				common.downloadFile(site, response["gfyItem"][format+"Url"]);
