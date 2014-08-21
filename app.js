@@ -6,6 +6,13 @@ var config = require('./config'),
  TODO:
   - Implement resuming when initial downloads are interrupted.
   - Proxy support.
+  - Summarize new files with 'update'
+  - New Ripper Ideas:
+    - Reddit
+    - Instagram
+    - SoundCloud
+    - YouTube
+    - Coursera
  */
 
 if (process.argv.length === 3) {

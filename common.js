@@ -16,7 +16,7 @@ downloaded = {};
 // download file at given url
 // returns true if it would be a duplicate file
 module.exports.downloadFileTo = function (site, siteUrl, filename) {
-	var name = url.parse(siteUrl).pathname.split('/').slice(-1).pop();
+	var name = decodeURIComponent(url.parse(siteUrl).pathname.split('/').slice(-1).pop()).replace(/\+/g, ' ');
 	var basePath = 'save' in site ? site.save : config.baseDir + site.name;
 	var path = basePath + '/' + (filename != null ? filename : name);
 	var duplicate = false;
