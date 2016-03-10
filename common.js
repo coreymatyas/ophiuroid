@@ -50,7 +50,7 @@ module.exports.downloadFileTo = function (site, siteUrl, filename) {
 			downloaded[basePath].push(path);
 		}).on('error', function(e) {
 			log.error(site.name + ' - Download file error. Retrying: ' + e.message);
-			downloadFile(site, siteUrl);
+			module.exports.downloadFileTo(site, siteUrl, filename);
 		});
 		return false;
 	} else {
